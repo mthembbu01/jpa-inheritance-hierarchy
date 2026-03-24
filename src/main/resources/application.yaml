@@ -1,0 +1,48 @@
+server:
+  port: 8085 #To support random port number
+#-- spring configurations
+spring:
+  application:
+    name: jpa-inheritance-hierarchy
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_jpa_inheritance_hierarchy
+    username: postgres
+    password: localpass
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      platform: h2
+      mode: always
+  web:
+    error:
+      include-message: always
+      include-binding-errors: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: jpa-inheritance-hierarchy
+    description: "jpa-inheritance-hierarchy Application"
+    version: "1.0.0"
+
+logging:
+  pattern:
+    console: "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
