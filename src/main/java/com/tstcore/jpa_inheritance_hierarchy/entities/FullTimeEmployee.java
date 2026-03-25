@@ -11,15 +11,20 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @ToString
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "part_time_employees")
 public class FullTimeEmployee extends Employee{
 
 
 
-    @Column(name = "hourly_wage", nullable = false)
+    @Column(name = "salary")
     private BigDecimal Salary;
+
+    @Builder
+    public FullTimeEmployee(String name, BigDecimal salary) {
+        super(null,name);
+        this.Salary  = salary;
+
+    }
 }
