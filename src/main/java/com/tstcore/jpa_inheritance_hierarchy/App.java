@@ -1,6 +1,6 @@
 package com.tstcore.jpa_inheritance_hierarchy;
 
-/** TABLE_PER_CLASS  states that a table per concrete entity class is created.
+/** TABLE_PER_CLASS states that a table per concrete entity class is created.
  *
  */
 
