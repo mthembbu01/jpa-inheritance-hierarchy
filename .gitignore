@@ -1,0 +1,122 @@
+
+# ===============================
+
+# Java / Maven / Gradle
+
+# ===============================
+
+# Compiled class files
+
+*.class
+
+# Logs
+
+*.log
+
+# Maven
+
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+
+.gradle/
+build/
+
+# ===============================
+
+# IDEs
+
+# ===============================
+
+# IntelliJ IDEA
+
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+
+.project
+.classpath
+.settings/
+
+# VS Code
+
+.vscode/
+
+# ===============================
+
+# OS Files
+
+# ===============================
+
+# Mac
+
+.DS_Store
+
+# Windows
+
+Thumbs.db
+
+# ===============================
+
+# Environment / Secrets
+
+# ===============================
+
+# Env files
+
+.env
+.env.*
+
+# Application configs (override per env)
+
+application-local.yml
+application-dev.yml
+application-prod.yml
+
+# Keystores / certificates
+
+*.jks
+*.p12
+*.pem
+*.key
+
+# ===============================
+
+# Test / Coverage
+
+# ===============================
+
+# Test output
+
+/test-output/
+
+# Coverage
+
+coverage/
+*.exec
+
+# ===============================
+
+# Docker / Kubernetes (optional)
+
+# ===============================
+
+docker-compose.override.yml
+
+# ===============================
+
+# Misc
+
+# ===============================
+
+*.swp
+*.tmp
