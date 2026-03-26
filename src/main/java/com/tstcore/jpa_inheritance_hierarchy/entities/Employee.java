@@ -15,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "employees")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "employee_type")
 public abstract class Employee {
     @Id
     @GeneratedValue
