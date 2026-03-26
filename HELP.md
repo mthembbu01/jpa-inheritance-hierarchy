@@ -30,3 +30,11 @@ While most of the inheritance is fine, it also inherits unwanted elements like `
 To prevent this, the project POM contains empty overrides for these elements.
 If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
 
+## Jpa Inheritance Hierarchy
+It is recomended to use one of the following approaches to create a JPA inheritance hierarchy:
+### 1. Joined Table Inheritance
+If data integrity and data quality are important, then joined table inheritance is recommended.
+### 2. Single Table Inheritance
+if performance is important, then single table inheritance is recommended. But you'll have to pay the price of 
+data integrity and data quality introduced by nullable columns.
+
