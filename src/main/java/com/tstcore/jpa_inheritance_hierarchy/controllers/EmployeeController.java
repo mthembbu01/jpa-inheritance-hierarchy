@@ -1,7 +1,10 @@
 package com.tstcore.jpa_inheritance_hierarchy.controllers;
 
 import com.tstcore.jpa_inheritance_hierarchy.entities.Employee;
+import com.tstcore.jpa_inheritance_hierarchy.entities.FullTimeEmployee;
+import com.tstcore.jpa_inheritance_hierarchy.entities.PartTimeEmployee;
 import com.tstcore.jpa_inheritance_hierarchy.entities.dtos.EmployeeCreateRequest;
+import com.tstcore.jpa_inheritance_hierarchy.enums.Type;
 import com.tstcore.jpa_inheritance_hierarchy.service.IEmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +24,13 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.save(employeeRequest),HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<Iterable<Employee>> getAllEmployees(){
-        return new ResponseEntity<>(employeeService.findAll(),HttpStatus.OK);
+    @GetMapping("/full-time")
+    public ResponseEntity<Iterable<FullTimeEmployee>> getAllFullTimeEmployees(){
+        return new ResponseEntity<>(employeeService.findAllFullTimeEmployees(),HttpStatus.OK);
+    }
+
+    @GetMapping("/part-time")
+    public ResponseEntity<Iterable<PartTimeEmployee>> getAllPartTimeEmployees(){
+        return new ResponseEntity<>(employeeService.findAllPartTimeEmployees(),HttpStatus.OK);
     }
 }

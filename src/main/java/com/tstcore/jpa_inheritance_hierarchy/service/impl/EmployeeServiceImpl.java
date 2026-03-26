@@ -5,7 +5,8 @@ import com.tstcore.jpa_inheritance_hierarchy.entities.FullTimeEmployee;
 import com.tstcore.jpa_inheritance_hierarchy.entities.PartTimeEmployee;
 import com.tstcore.jpa_inheritance_hierarchy.entities.dtos.EmployeeCreateRequest;
 import com.tstcore.jpa_inheritance_hierarchy.enums.Type;
-import com.tstcore.jpa_inheritance_hierarchy.repositories.EmployeeRepository;
+import com.tstcore.jpa_inheritance_hierarchy.repositories.FullTimeRepository;
+import com.tstcore.jpa_inheritance_hierarchy.repositories.PartTimeRepository;
 import com.tstcore.jpa_inheritance_hierarchy.service.IEmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,26 +17,30 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
 
-    private final EmployeeRepository employeeRepository;
+    private final FullTimeRepository fullTimeRepository;
+    private final PartTimeRepository partTimeRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeServiceImpl(FullTimeRepository fullTimeRepository, PartTimeRepository partTimeRepository) {
+        this.fullTimeRepository = fullTimeRepository;
+        this.partTimeRepository = partTimeRepository;
     }
 
     @Override
     public Employee save(EmployeeCreateRequest employeeRequest){
         //-- Declare the employee object
-        Employee employee;
+        Employee savedEmployee = null;
         //-- Check the employee type and create the object accordingly
         if (employeeRequest.getType().equals(Type.FULL_TIME)){
-            employee = new FullTimeEmployee(employeeRequest.getName(), employeeRequest.getSalary());
+            FullTimeEmployee fullTimeEmployee = new FullTimeEmployee(employeeRequest.getName(), employeeRequest.getSalary());
+            //-- Save the employee
+            savedEmployee = fullTimeRepository.save(fullTimeEmployee);
         } else if (employeeRequest.getType().equals(Type.PART_TIME)){
-            employee = new PartTimeEmployee(employeeRequest.getName(), employeeRequest.getHourlyWage());
+            PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employeeRequest.getName(), employeeRequest.getHourlyWage());
+            savedEmployee = partTimeRepository.save(partTimeEmployee);
         } else {
             throw new IllegalArgumentException("Invalid employee type: " + employeeRequest.getType());
         }
-        //-- Save the employee
-        Employee savedEmployee = employeeRepository.save(employee);
+
         //-- Log the saved employee
         log.info("Saved employee: {}", savedEmployee);
         //-- Return the saved employee
@@ -43,7 +48,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public List<Employee> findAll(){
-        return employeeRepository.findAll();
+    public Iterable<FullTimeEmployee> findAllFullTimeEmployees(){
+            return fullTimeRepository.findAll();
+    }
+
+    @Override
+    public Iterable<PartTimeEmployee> findAllPartTimeEmployees(){
+            return partTimeRepository.findAll();
     }
 }
